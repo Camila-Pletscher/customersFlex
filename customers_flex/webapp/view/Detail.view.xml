@@ -1,0 +1,77 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.proy.customersflex.controller.Detail"
+    xmlns:u="sap.uxap"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout">
+    <u:ObjectPageLayout >
+        <u:headerTitle>
+            <u:ObjectPageDynamicHeaderTitle >
+                <u:actions>
+                    <Button icon="sap-icon://decline" press="onCloseDetail"></Button>
+                </u:actions>
+                <!-- Sin expandir se ve en el header -->
+                <u:snappedHeading>
+                    <FlexBox fitContainer="true" alignItems="Center">
+                        <Avatar src="{selectedCustomerModel>/CompanyName}" class="sapUiTinyMarginEnd" />
+                        <Title text="{selectedCustomerModel>/ContactName}"/>
+
+                    </FlexBox>
+                </u:snappedHeading>
+                <!-- Sin expandir en el cuerpo -->
+                <u:snappedContent>
+                    <Text text="{selectedCustomerModel>/CompanyName}"/>
+                </u:snappedContent>
+
+                <u:expandedContent>
+                    <Title text="{i18n>contact} {selectedCustomerModel>/ContactName}"></Title>
+                </u:expandedContent>
+            </u:ObjectPageDynamicHeaderTitle>
+        </u:headerTitle>
+
+        <u:headerContent>
+            <l:VerticalLayout enabled="true">
+                <Avatar src="sap-icon://address-book" class="sapUiTinyMarginEnd"/>
+            </l:VerticalLayout>
+            <l:VerticalLayout enabled="true">
+                <Label text="{i18n>companyname} {selectedCustomerModel>/CompanyName}" />
+                <Label text="{i18n>contacttitle} {selectedCustomerModel>/ContactTitle}" />
+            </l:VerticalLayout>
+        </u:headerContent>
+
+        <u:sections>
+            <u:ObjectPageSection >
+                <u:subSections>
+                    <u:ObjectPageSubSection title="{i18n>address}">
+                        <u:blocks>
+                            <Text text="{selectedCustomerModel>/Address}" />
+                        </u:blocks>
+                    </u:ObjectPageSubSection>
+                </u:subSections>
+                <u:subSections>
+                    <u:ObjectPageSubSection title="{i18n>city}">
+                        <u:blocks>
+                            <Text text="{selectedCustomerModel>/City}" />
+                        </u:blocks>
+                    </u:ObjectPageSubSection>
+                </u:subSections>
+                <u:subSections>
+                    <u:ObjectPageSubSection title="{i18n>country}">
+                        <u:blocks>
+                            <Text text="{selectedCustomerModel>/Country}" />
+                        </u:blocks>
+                    </u:ObjectPageSubSection>
+                </u:subSections>
+                <u:subSections>
+                    <u:ObjectPageSubSection title="{i18n>phone}">
+                        <u:blocks>
+                            <Text text="{selectedCustomerModel>/Phone}" />
+                        </u:blocks>
+                    </u:ObjectPageSubSection>
+                </u:subSections>
+            </u:ObjectPageSection>
+        </u:sections>
+
+
+    </u:ObjectPageLayout>
+</mvc:View>
