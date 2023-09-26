@@ -1,0 +1,57 @@
+_schema-version: "3.2"
+ID: customersFlex
+version: 0.0.1
+modules:
+- name: customersFlex-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: customersFlex-destination-service
+    parameters:
+      content-target: true
+  - name: customersFlex_html_repo_host
+    parameters:
+      service-key:
+        name: customersFlex_html_repo_host-key
+  - name: uaa_customersFlex
+    parameters:
+      service-key:
+        name: uaa_customersFlex-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: customersFlex_customersFlex_html_repo_host
+          ServiceInstanceName: customersFlex-html5-app-host-service
+          ServiceKeyName: customersFlex_html_repo_host-key
+          sap.cloud.service: customersFlex
+        - Authentication: OAuth2UserTokenExchange
+          Name: customersFlex_uaa_customersFlex
+          ServiceInstanceName: customersFlex-xsuaa-service
+          ServiceKeyName: uaa_customersFlex-key
+          sap.cloud.service: customersFlex
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+resources:
+- name: customersFlex-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      version: 1.0.0
+    service: destination
+    service-name: customersFlex-destination-service
+    service-plan: lite
+- name: customersFlex_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: customersFlex-html5-app-host-service
+    service-plan: app-host
+- name: uaa_customersFlex
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: customersFlex-xsuaa-service
+    service-plan: application
